@@ -4,36 +4,36 @@ View module for Hangman game using Pygame.
 
 import pygame
 
+# --- Module-level constants ---
+WIDTH = 800
+HEIGHT = 600
+BG_COLOR = (255, 255, 255)
+LINE_COLOR = (0, 0, 0)
+MSG_COLOR = (200, 0, 0)
+INPUT_COLOR_ACTIVE = pygame.Color("dodgerblue2")
+INPUT_COLOR_INACTIVE = pygame.Color("lightskyblue3")
+FONT_NAME = "Arial"
+FONT_LARGE = 48
+FONT_SMALL = 32
+FPS = 30
+HANGMAN_BASE_Y = 350
+HANGMAN_LINE_W = 8
+
 
 class View:
     """
     Manages all visual elements and user text input for the Hangman game using Pygame.
     """
 
-    WIDTH = 800
-    HEIGHT = 600
-    BG_COLOR = (255, 255, 255)
-    LINE_COLOR = (0, 0, 0)
-    MSG_COLOR = (200, 0, 0)
-    INPUT_COLOR_ACTIVE = pygame.Color("dodgerblue2")
-    INPUT_COLOR_INACTIVE = pygame.Color("lightskyblue3")
-    FONT_NAME = "Arial"
-    FONT_LARGE = 48
-    FONT_SMALL = 32
-    FPS = 30
-
-    HANGMAN_BASE_Y = 350
-    HANGMAN_LINE_W = 8
-
     def __init__(self):
         """
         Initialize Pygame, create the main window, set up fonts, and start the clock.
         """
         pygame.init()
-        self.screen = pygame.display.set_mode((self.WIDTH, self.HEIGHT))
+        self.screen = pygame.display.set_mode((WIDTH, HEIGHT))
         pygame.display.set_caption("Hangman")
-        self.font = pygame.font.SysFont(self.FONT_NAME, self.FONT_LARGE)
-        self.small_font = pygame.font.SysFont(self.FONT_NAME, self.FONT_SMALL)
+        self.font = pygame.font.SysFont(FONT_NAME, FONT_LARGE)
+        self.small_font = pygame.font.SysFont(FONT_NAME, FONT_SMALL)
         self.clock = pygame.time.Clock()
 
     def display_game_state(self, game):
@@ -48,21 +48,21 @@ class View:
                     known_word (List[str]): current revealed letters.
                     used_letters (List[str]): letters guessed so far.
         """
-        self.screen.fill(self.BG_COLOR)
+        self.screen.fill(BG_COLOR)
         self.draw_hangman(game.mistakes_made)
         word_surf = self.font.render(
-            " ".join(game.known_word), True, self.LINE_COLOR
+            " ".join(game.known_word), True, LINE_COLOR
         )
         self.screen.blit(word_surf, (50, 420))
 
         guesses = ", ".join(game.used_letters)
         guess_surf = self.small_font.render(
-            f"Guessed: {guesses}", True, self.LINE_COLOR
+            f"Guessed: {guesses}", True, LINE_COLOR
         )
         self.screen.blit(guess_surf, (50, 480))
 
         pygame.display.flip()
-        self.clock.tick(self.FPS)
+        self.clock.tick(FPS)
 
     def draw_hangman(self, mistakes):
         """
@@ -71,38 +71,34 @@ class View:
         Args:
             mistakes (int): Number of incorrect guesses made by the player.
         """
-        base_y = self.HANGMAN_BASE_Y
-        w = self.HANGMAN_LINE_W
         # Draw gallows
         pygame.draw.line(
-            self.screen, self.LINE_COLOR, (50, base_y), (50, 50), w
+            self.screen,
+            LINE_COLOR,
+            (50, HANGMAN_BASE_Y),
+            (50, 50),
+            HANGMAN_LINE_W,
         )
-        pygame.draw.line(self.screen, self.LINE_COLOR, (50, 50), (150, 50), w)
-        pygame.draw.line(self.screen, self.LINE_COLOR, (150, 50), (150, 100), w)
+        pygame.draw.line(
+            self.screen, LINE_COLOR, (50, 50), (150, 50), HANGMAN_LINE_W
+        )
+        pygame.draw.line(
+            self.screen, LINE_COLOR, (150, 50), (150, 100), HANGMAN_LINE_W
+        )
 
-        # Draw body parts
+        # Draw body parts in order
         if mistakes > 0:  # head
-            pygame.draw.circle(self.screen, self.LINE_COLOR, (150, 130), 30, 5)
+            pygame.draw.circle(self.screen, LINE_COLOR, (150, 130), 30, 5)
         if mistakes > 1:  # torso
-            pygame.draw.line(
-                self.screen, self.LINE_COLOR, (150, 160), (150, 230), 5
-            )
+            pygame.draw.line(self.screen, LINE_COLOR, (150, 160), (150, 230), 5)
         if mistakes > 2:  # left arm
-            pygame.draw.line(
-                self.screen, self.LINE_COLOR, (150, 180), (100, 220), 5
-            )
+            pygame.draw.line(self.screen, LINE_COLOR, (150, 180), (100, 220), 5)
         if mistakes > 3:  # right arm
-            pygame.draw.line(
-                self.screen, self.LINE_COLOR, (150, 180), (200, 220), 5
-            )
+            pygame.draw.line(self.screen, LINE_COLOR, (150, 180), (200, 220), 5)
         if mistakes > 4:  # left leg
-            pygame.draw.line(
-                self.screen, self.LINE_COLOR, (150, 230), (125, 275), 5
-            )
+            pygame.draw.line(self.screen, LINE_COLOR, (150, 230), (125, 275), 5)
         if mistakes > 5:  # right leg
-            pygame.draw.line(
-                self.screen, self.LINE_COLOR, (150, 230), (175, 275), 5
-            )
+            pygame.draw.line(self.screen, LINE_COLOR, (150, 230), (175, 275), 5)
 
     def display_message(self, message, duration=2000):
         """
@@ -112,8 +108,8 @@ class View:
             message (str): Text to display.
             duration (int): Time in milliseconds to show the message.
         """
-        msg_surf = self.small_font.render(message, True, self.MSG_COLOR)
-        rect = msg_surf.get_rect(center=(self.WIDTH // 2, 520))
+        msg_surf = self.small_font.render(message, True, MSG_COLOR)
+        rect = msg_surf.get_rect(center=(WIDTH // 2, 520))
         self.screen.blit(msg_surf, rect)
         pygame.display.flip()
         pygame.time.delay(duration)
@@ -134,7 +130,7 @@ class View:
             str or None: Lowercase letter entered, or None on quit.
         """
         input_box = pygame.Rect(50, 550, 200, 36)
-        color = self.INPUT_COLOR_INACTIVE
+        color = INPUT_COLOR_INACTIVE
         active = False
         text = ""
 
@@ -145,9 +141,7 @@ class View:
                 elif event.type == pygame.MOUSEBUTTONDOWN:
                     active = input_box.collidepoint(event.pos)
                     color = (
-                        self.INPUT_COLOR_ACTIVE
-                        if active
-                        else self.INPUT_COLOR_INACTIVE
+                        INPUT_COLOR_ACTIVE if active else INPUT_COLOR_INACTIVE
                     )
                 elif event.type == pygame.KEYDOWN and active:
                     if event.key == pygame.K_RETURN:
@@ -165,13 +159,13 @@ class View:
                         if char.isalpha() and len(text) == 0:
                             text = char
 
-            self.screen.fill(self.BG_COLOR, input_box)
-            prompt_surf = self.small_font.render(prompt, True, self.LINE_COLOR)
+            self.screen.fill(BG_COLOR, input_box)
+            prompt_surf = self.small_font.render(prompt, True, LINE_COLOR)
             self.screen.blit(prompt_surf, (50, 510))
 
-            txt_surf = self.small_font.render(text, True, self.LINE_COLOR)
+            txt_surf = self.small_font.render(text, True, LINE_COLOR)
             self.screen.blit(txt_surf, (input_box.x + 5, input_box.y + 5))
             pygame.draw.rect(self.screen, color, input_box, 2)
 
             pygame.display.flip()
-            self.clock.tick(self.FPS)
+            self.clock.tick(FPS)
