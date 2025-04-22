@@ -22,12 +22,14 @@ HANGMAN_LINE_W = 8
 
 class View:
     """
-    Manages all visual elements and user text input for the Hangman game using Pygame.
+    Manages all visual elements and user text input for the Hangman game using
+    Pygame.
     """
 
     def __init__(self):
         """
-        Initialize Pygame, create the main window, set up fonts, and start the clock.
+        Initialize Pygame, create the main window, set up fonts, and start the
+        clock.
         """
         pygame.init()
         self.screen = pygame.display.set_mode((WIDTH, HEIGHT))
@@ -38,9 +40,9 @@ class View:
 
     def display_game_state(self, game):
         """
-        Render the current state of the game by drawing the gallows and body parts,
-        showing the partially guessed word, and lists the letters already used.
-        Then updates the display and maintain the frame rate.
+        Render the current state of the game by drawing the gallows and body
+        parts, showing the partially guessed word, and lists the letters already
+        used. Then updates the display and maintain the frame rate.
 
         Args:
             game: An object with attributes:
@@ -66,7 +68,8 @@ class View:
 
     def draw_hangman(self, mistakes):
         """
-        Draw the gallows and hangman body parts corresponding to the number of mistakes.
+        Draw the gallows and hangman body parts corresponding to the number of
+        mistakes.
 
         Args:
             mistakes (int): Number of incorrect guesses made by the player.
