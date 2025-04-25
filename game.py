@@ -47,10 +47,10 @@ class Game:
             RandomWords().get_random_word()
         )  # A list that represents the word that is being guessed in the game,
         # split up such that each letter is an element of the list.
-        self.known_word = ["" for _ in range(len(self._secret_word))]
+        self.known_word = ["_" for _ in range(len(self._secret_word))]
         self.mistakes_made = 0
 
-    def take_turn(self):
+    def take_turn(self, letter):
         """
         Prompts the user to take their turn by inputting a letter and checks of
         their input is valid and in the word. If it is invalid the user is
@@ -59,13 +59,12 @@ class Game:
         all instances of the letter are inserted into the blanks of the word.
 
         Args:
-            None.
+            letter: string representing the input character.
 
         Returns:
             False is the user has made the maximum amount of mistakes, and True
             otherwise.
         """
-        letter = input("Enter a Letter:")
         if len(letter) != 1 or letter in NUM_LIST:
             print(
                 f"'{letter}' is not a valid input, please only input a single"
