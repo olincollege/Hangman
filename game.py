@@ -62,8 +62,8 @@ class Game:
             letter: string representing the input character.
 
         Returns:
-            False is the user has made the maximum amount of mistakes, and True
-            otherwise.
+            False is the user has made the maximum amount of mistakes, True if
+            the user won the game, and None otherwise.
         """
         if len(letter) != 1 or letter in NUM_LIST:
             print(
@@ -84,7 +84,8 @@ class Game:
             self.mistakes_made += 1
         if self.mistakes_made >= ALLOWED_MISTAKES:
             return False
-        return True
+        if self._secret_word == self.known_word:
+            return True
 
     @property
     def secret_word(self):
