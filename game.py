@@ -86,6 +86,7 @@ class Game:
             return False
         if self._secret_word == self.known_word:
             return True
+        return None
 
     @property
     def secret_word(self):
