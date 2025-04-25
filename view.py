@@ -172,3 +172,22 @@ class View:
 
             pygame.display.flip()
             self.clock.tick(FPS)
+
+    def game_over(self, won):
+        """
+        Display a game over message indicating whether the player won or lost,
+        and wait for the user to press any key or close the window.
+
+        Args:
+            won (bool): True if the player won; False if the player lost.
+        """
+        self.screen.fill(BG_COLOR)
+        text = "Game Over! You win!" if won else "Game Over! You lose!"
+        msg_surf = self.font.render(text, True, MSG_COLOR)
+        msg_rect = msg_surf.get_rect(center=(WIDTH // 2, HEIGHT // 2))
+        self.screen.blit(msg_surf, msg_rect)
+        pygame.display.flip()
+        while True:
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT or event.type == pygame.KEYDOWN:
+                    break
