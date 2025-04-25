@@ -70,10 +70,10 @@ class Game:
                 f"'{letter}' is not a valid input, please only input a single"
                 " letter"
             )
-            self.take_turn()
+            self.take_turn(letter)
         elif letter in self.used_letters:
             print(f"You already used '{letter}', choose another letter.")
-            self.take_turn()
+            self.take_turn(letter)
         elif letter in self._secret_word:
             for secret_word_letter_index, secret_word_letter_value in enumerate(
                 self._secret_word
