@@ -42,7 +42,7 @@ class Game:
         Returns:
             None.
         """
-        self.used_letters = []
+        self.incorrect_letters = []
         self._secret_word = list(
             RandomWords().get_random_word()
         )  # A list that represents the word that is being guessed in the game,
@@ -65,26 +65,23 @@ class Game:
             False is the user has made the maximum amount of mistakes, True if
             the user won the game, and None otherwise.
         """
-        if len(letter) != 1 or letter in NUM_LIST:
-            print(
-                f"'{letter}' is not a valid input, please only input a single"
-                " letter"
-            )
-            self.take_turn(letter)
-        elif letter in self.used_letters:
-            print(f"You already used '{letter}', choose another letter.")
-            self.take_turn(letter)
-        elif letter in self._secret_word:
-            for secret_word_letter_index, secret_word_letter_value in enumerate(
-                self._secret_word
-            ):
-                if letter == secret_word_letter_value:
-                    self.known_word[secret_word_letter_index] = letter
+        letter = letter.lower()
+        if len(letter) != 1 or letter in NUM_LIST or not letter.isalpha():
+            print("Please enter a single letter.")
+            return None
+        if letter in self.known_word or letter in self.incorrect_letters:
+            print(f"You already guessed '{letter}'.")
+            return None
+        if letter in self._secret_word:
+            for i, ch in enumerate(self._secret_word):
+                if ch == letter:
+                    self.known_word[i] = ch
         else:
+            self.incorrect_letters.append(letter)
             self.mistakes_made += 1
         if self.mistakes_made >= ALLOWED_MISTAKES:
             return False
-        if self._secret_word == self.known_word:
+        if "_" not in self.known_word:
             return True
         return None
 
@@ -104,3 +101,10 @@ class Game:
             split up such that each letter is an element.
         """
         return self._secret_word
+
+    @property
+    def word(self):
+        """
+        Return the secret word as a single string.
+        """
+        return "".join(self._secret_word)

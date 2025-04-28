@@ -57,9 +57,9 @@ class View:
         )
         self.screen.blit(word_surf, (50, 420))
 
-        guesses = ", ".join(game.used_letters)
+        wrong = ", ".join(game.incorrect_letters)
         guess_surf = self.small_font.render(
-            f"Guessed: {guesses}", True, LINE_COLOR
+            f"Incorrect: {wrong}", True, LINE_COLOR
         )
         self.screen.blit(guess_surf, (50, 480))
 
@@ -173,21 +173,36 @@ class View:
             pygame.display.flip()
             self.clock.tick(FPS)
 
-    def game_over(self, won):
-        """
-        Display a game over message indicating whether the player won or lost,
-        and wait for the user to press any key or close the window.
+    def game_over(self, won, word):
+        """Display a game-over message and wait for a key press or window close.
+
+        Shows whether the player won or lost, and if they lost,
+        reveals the secret word.
 
         Args:
-            won (bool): True if the player won; False if the player lost.
+            won (bool): True if the player won; False if they lost.
+            word (str): The full secret word to reveal on loss.
+
+        Returns:
+            None
         """
         self.screen.fill(BG_COLOR)
-        text = "Game Over! You win!" if won else "Game Over! You lose!"
-        msg_surf = self.font.render(text, True, MSG_COLOR)
-        msg_rect = msg_surf.get_rect(center=(WIDTH // 2, HEIGHT // 2))
-        self.screen.blit(msg_surf, msg_rect)
+
+        if won:
+            lines = ["Game Over! You Win!", f"Word was: {word}"]
+        else:
+            lines = ["Game Over! You Lose!", f"Word was: {word}"]
+
+        for i, line in enumerate(lines):
+            surf = self.font.render(line, True, MSG_COLOR)
+            rect = surf.get_rect(
+                center=(WIDTH // 2, HEIGHT // 2 + i * (FONT_LARGE + 10))
+            )
+            self.screen.blit(surf, rect)
+
         pygame.display.flip()
+
         while True:
             for event in pygame.event.get():
-                if event.type == pygame.QUIT or event.type == pygame.KEYDOWN:
-                    break
+                if event.type in (pygame.QUIT, pygame.KEYDOWN):
+                    return
