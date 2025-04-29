@@ -84,8 +84,8 @@ class Game:
 
     def check_win(self):
         """
-        Checks of the game has been won by checking if all letters are guessed in
-        known words
+        Checks of the game has been won by checking if all letters are guessed
+        in known words
 
         Args:
             None
@@ -96,7 +96,7 @@ class Game:
         if "_" not in self.known_word:
             return True
         return False
-        
+
     def check_loss(self):
         """
         Checks of the game has been lost by checking if the maximum allowed 
