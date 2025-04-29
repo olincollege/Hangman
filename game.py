@@ -89,6 +89,7 @@ class Game:
 
         Args:
             None
+
         Returns:
             True if the user won the game, and False otherwise.
         """
@@ -102,7 +103,8 @@ class Game:
         mistakes is reached.
 
         Args:
-            None
+            None.
+
         Returns:
             True is the user has made the maximum amount of mistakes, False if
             otherwise.
@@ -110,7 +112,7 @@ class Game:
         if self.mistakes_made >= ALLOWED_MISTAKES:
             return True
         return False
-    
+
     @property
     def secret_word(self):
         """
@@ -132,5 +134,11 @@ class Game:
     def word(self):
         """
         Return the secret word as a single string.
+        Args:
+            None.
+        
+        Returns:
+            A string that represents the secret word that the player is trying
+            guess.
         """
         return "".join(self._secret_word)
