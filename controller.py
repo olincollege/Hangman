@@ -24,8 +24,10 @@ def game_loop(game, view):
         game.take_turn(letter)
         if game.check_win():
             view.game_over(True, game.word)
+            return
         elif game.check_loss():
             view.game_over(False, game.word)
+            return
 
 if __name__ == "__main__":
     pygame.init()
