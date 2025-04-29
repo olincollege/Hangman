@@ -1,4 +1,6 @@
-# controller.py
+"""
+Controls the game by integrating game.py and view.py
+"""
 
 import pygame
 from game import Game
