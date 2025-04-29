@@ -19,6 +19,16 @@ def test_take_turn_one_turn_incorrect():
     game.take_turn("g")
     assert game.known_word == ["_","_","_"]
 
+def test_take_turn_one_turn_incorrect():
+    # tests a case where user takes their first turn and guesses
+    # incorrectly.
+    game = Game()
+    game._secret_word = list("cat")
+    game.known_word = ["_","_","_"]
+    game.take_turn("g")
+
+    assert game.mistakes_made == 1
+
 def test_take_turn_one_turn_game_win():
     # tests a case where user takes their turn and they win
     game = Game()

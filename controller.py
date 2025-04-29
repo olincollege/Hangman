@@ -21,11 +21,11 @@ def game_loop(game, view):
         if letter is None:
             return
 
-        result = game.take_turn(letter)
-        if result is not None:
-            view.game_over(result, game.word)
-            return
-
+        game.take_turn(letter)
+        if game.check_win():
+            view.game_over(True, game.word)
+        elif game.check_loss():
+            view.game_over(False, game.word)
 
 if __name__ == "__main__":
     pygame.init()

@@ -64,8 +64,7 @@ class Game:
             letter: string representing the input character.
 
         Returns:
-            False is the user has made the maximum amount of mistakes, True if
-            the user won the game, and None otherwise.
+            None
         """
         letter = letter.lower()
         if len(letter) != 1 or letter in NUM_LIST or not letter.isalpha():
@@ -81,12 +80,37 @@ class Game:
         else:
             self.incorrect_letters.append(letter)
             self.mistakes_made += 1
-        if self.mistakes_made >= ALLOWED_MISTAKES:
-            return False
-        if "_" not in self.known_word:
-            return True
         return None
 
+    def check_win(self):
+        """
+        Checks of the game has been won by checking if all letters are guessed in
+        known words
+
+        Args:
+            None
+        Returns:
+            True if the user won the game, and False otherwise.
+        """
+        if "_" not in self.known_word:
+            return True
+        return False
+        
+    def check_loss(self):
+        """
+        Checks of the game has been lost by checking if the maximum allowed 
+        mistakes is reached.
+
+        Args:
+            None
+        Returns:
+            True is the user has made the maximum amount of mistakes, False if
+            otherwise.
+        """
+        if self.mistakes_made >= ALLOWED_MISTAKES:
+            return True
+        return False
+    
     @property
     def secret_word(self):
         """
