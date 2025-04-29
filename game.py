@@ -30,6 +30,9 @@ class Game:
         mistakes_made: An integer representing the amount of incorrect guesses
         the users have made, it dictates how much of the hangman is drawn, and
         when it reaches 6 (head, torso, 2 hands, 2 feet) the game ends.
+
+        _secret_word: A list that represents the word that is being guessed in
+        the game, split up such that each letter is an element of the list.
     """
 
     def __init__(self):
@@ -45,8 +48,7 @@ class Game:
         self.incorrect_letters = []
         self._secret_word = list(
             RandomWords().get_random_word()
-        )  # A list that represents the word that is being guessed in the game,
-        # split up such that each letter is an element of the list.
+        )
         self.known_word = ["_" for _ in range(len(self._secret_word))]
         self.mistakes_made = 0
 
