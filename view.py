@@ -4,7 +4,7 @@ View module for Hangman game using Pygame.
 
 import pygame
 
-# --- Module-level constants ---
+# Window dimensions, colors, fonts, and game timing
 WIDTH = 800
 HEIGHT = 600
 BG_COLOR = (255, 255, 255)
@@ -132,6 +132,7 @@ class View:
         Returns:
             str or None: Lowercase letter entered, or None on quit.
         """
+        # Display input box and handle user typing
         input_box = pygame.Rect(50, 550, 200, 36)
         color = INPUT_COLOR_INACTIVE
         active = False
@@ -147,6 +148,7 @@ class View:
                         INPUT_COLOR_ACTIVE if active else INPUT_COLOR_INACTIVE
                     )
                 elif event.type == pygame.KEYDOWN and active:
+                    # When enter return valid single character or show error
                     if event.key == pygame.K_RETURN:
                         if len(text) == 1:
                             return text
@@ -162,6 +164,7 @@ class View:
                         if char.isalpha() and len(text) == 0:
                             text = char
 
+            # Redraw prompt and input text
             self.screen.fill(BG_COLOR, input_box)
             prompt_surf = self.small_font.render(prompt, True, LINE_COLOR)
             self.screen.blit(prompt_surf, (50, 510))
@@ -194,6 +197,7 @@ class View:
             lines = ["Game Over! You Lose!", f"Word was: {word}"]
 
         for i, line in enumerate(lines):
+            # Render lines in green for win, red for loss
             if won:
                 surf = self.font.render(line, True, (0, 255, 0))
             else:
@@ -205,6 +209,7 @@ class View:
 
         pygame.display.flip()
 
+        # Wait for quit or any key press
         while True:
             for event in pygame.event.get():
                 if event.type in (pygame.QUIT, pygame.KEYDOWN):
