@@ -46,9 +46,7 @@ class Game:
             None.
         """
         self.incorrect_letters = []
-        self._secret_word = list(
-            RandomWords().get_random_word()
-        )
+        self._secret_word = list(RandomWords().get_random_word())
         self.known_word = ["_" for _ in range(len(self._secret_word))]
         self.mistakes_made = 0
 
@@ -99,7 +97,7 @@ class Game:
 
     def check_loss(self):
         """
-        Checks of the game has been lost by checking if the maximum allowed 
+        Checks of the game has been lost by checking if the maximum allowed
         mistakes is reached.
 
         Args:
@@ -136,7 +134,7 @@ class Game:
         Return the secret word as a single string.
         Args:
             None.
-        
+
         Returns:
             A string that represents the secret word that the player is trying
             guess.
