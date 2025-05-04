@@ -189,12 +189,15 @@ class View:
         self.screen.fill(BG_COLOR)
 
         if won:
-            lines = ["Game Over! You Win!", f"Word was: {word}"]
+            lines = ["You Win!", f"Word was: {word}"]
         else:
             lines = ["Game Over! You Lose!", f"Word was: {word}"]
 
         for i, line in enumerate(lines):
-            surf = self.font.render(line, True, MSG_COLOR)
+            if won:
+                surf = self.font.render(line, True, (0, 255, 0))
+            else:
+                surf = self.font.render(line, True, (200, 0, 0))
             rect = surf.get_rect(
                 center=(WIDTH // 2, HEIGHT // 2 + i * (FONT_LARGE + 10))
             )
