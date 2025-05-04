@@ -1,36 +1,18 @@
-# Python Project Template Repository
+# Hangman
 
-This is a template repository for a Python project. Feel free to use and edit
-this repository (including this file) for your needs. Below, find some
-instructions and tips for using this template repository.
+## Summary:
 
-## How to Use
+In this project, we have made a fully functional game of Hangman: which is a game in which you are given a series of dashes that represent the length of a word that you need to guess, you can type in one letter at a time and if it is correct all instances of that letter are filled in, but if you are wrong the Hangman gets one more of his parts drawn. If all the parts of the hangman (6 total) are drawn before you guess the word, you lose, otherwise you guessed the word correctly and you won! This game is complete with a PyGame GUI that shows line art of a stick figure being hung as the player gets words wrong, a list of letters that you already used, dashes to represent the letters that still need to be guessed, and letters that have been correctly guessed already replacing the dashed when you input them into the input text box. It also had a "You Win" screen and a "Game Over" screen, both with the actual word displayed.
 
-Click on the "Use this template" button in the top right corner to create a new
-repository based on this template. If this is for a class project, we ask that
-you keep it in the `olincollege` GitHub organization, and that you refrain from
-keeping the repository private. This will ensure that relevant people can access
-your repository for assessment, etc.
+## Dependencies:
 
-## Requirements
-
-The `requirements.txt` file is blank and should be filled out with any project
-dependencies. There is a Python package called `pipreqs` that autogenerates the
-contents of the `requirements.txt` file based on the `import` statements in your
-`.py` files. To get this, run
+To run the code, you need to have all python files in the same folder, you will also need to install the python libraries `pygame` and `random_word`. Install them by writing the following into your terminal:
 
 ```
-pip install pipreqs
+pip install pygame
+pip install random_word
 ```
 
-Then, in the root of your project repository, run:
+## Playing the Game:
 
-```
-pipreqs --mode compat
-```
-
-
-
-
-If you already have a `requirements.txt`, the above command will ask you to
-rerun the command with the `--force` flag to overwrite it.
+You just need to run the file controller.py, and if all of the python files are in the same folder, it will run the game, where you can input your guesses into the PyGame textbox to play the game.
