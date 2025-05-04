@@ -112,7 +112,7 @@ class View:
             duration (int): Time in milliseconds to show the message.
         """
         msg_surf = self.small_font.render(message, True, MSG_COLOR)
-        rect = msg_surf.get_rect(center=(WIDTH // 2, 520))
+        rect = msg_surf.get_rect(center=(500, 520))
         self.screen.blit(msg_surf, rect)
         pygame.display.flip()
         pygame.time.delay(duration)

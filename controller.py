@@ -21,6 +21,10 @@ def game_loop(game, view):
         if letter is None:
             return
 
+        if letter in game.known_word or letter in game.incorrect_letters:
+            view.display_message(f"You already entered {letter}", 1500)
+            continue
+
         game.take_turn(letter)
         if game.check_win():
             view.game_over(True, game.word)
@@ -28,6 +32,7 @@ def game_loop(game, view):
         elif game.check_loss():
             view.game_over(False, game.word)
             return
+
 
 if __name__ == "__main__":
     pygame.init()
