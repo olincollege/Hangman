@@ -14,5 +14,8 @@ pip install random_word
 ```
 
 ## Playing the Game:
-
-You just need to run the file controller.py, and if all of the python files are in the same folder, it will run the game, where you can input your guesses into the PyGame textbox to play the game.
+Run
+```
+git clone git@github.com:olincollege/Hangman.git
+```
+After that you just need to run the file controller.py, and if all of the python files are in the same folder, it will run the game, where you can input your guesses into the PyGame textbox to play the game.
