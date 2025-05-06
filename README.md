@@ -14,7 +14,7 @@ pip install random_word
 ```
 
 ## Playing the Game:
-run
+Run
 ```
 git clone git@github.com:olincollege/Hangman.git
 ```
