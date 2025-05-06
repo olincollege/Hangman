@@ -4,13 +4,14 @@ Test file for game.py
 
 from game import Game
 
+
 def test_take_turn_one_turn():
     """
     Tests a case where user takes their first turn and guesses correctly.
 
     Args:
         None.
-    
+
     Returns:
         None.
     """
@@ -27,7 +28,7 @@ def test_take_turn_one_turn_incorrect():
 
     Args:
         None.
-    
+
     Returns:
         None.
     """
@@ -45,7 +46,7 @@ def test_take_turn_incorrect_input_letter():
 
     Args:
         None.
-    
+
     Returns:
         None.
     """
@@ -62,7 +63,7 @@ def test_take_turn_repeat_input():
 
     Args:
         None.
-    
+
     Returns:
         None.
     """
@@ -81,7 +82,7 @@ def test_take_turn_incorrect_input_non_letter_symbol():
 
     Args:
         None.
-    
+
     Returns:
         None.
     """
@@ -98,7 +99,7 @@ def test_game_win_win():
 
     Args:
         None.
-    
+
     Returns:
         None.
     """
@@ -115,7 +116,7 @@ def test_game_win_no_win():
 
     Args:
         None.
-    
+
     Returns:
         None.
     """
@@ -124,13 +125,14 @@ def test_game_win_no_win():
     game.known_word = ["_", "_", "_"]
     assert game.check_win() is False
 
+
 def test_game_lose_lose():
     """
     Tests a case where user takes their turn and they lose.
 
     Args:
         None.
-    
+
     Returns:
         None.
     """
@@ -147,7 +149,7 @@ def test_game_lose_no_lose():
 
     Args:
         None.
-    
+
     Returns:
         None.
     """
